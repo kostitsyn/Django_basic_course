@@ -1,0 +1,9 @@
+<ul class="menu">
+    <li class="menu-list"><a href="{% url 'main' %}" {% if request.resolver_match.url_name == 'main' %}class="menu-link menu-link-active" {% else %}class="menu-link"{% endif %}>Home</a></li>
+    <li class="menu-list"><a href="#" class="menu-link">About</a></li>
+    <li class="menu-list"><a href="#" class="menu-link">Service</a></li>
+    <li class="menu-list"><a href="{% url 'gallery' %}" {% if request.resolver_match.url_name == 'gallery' %}class="menu-link menu-link-active" {% else %}class="menu-link"{% endif %}>Gallery</a></li>
+    <li class="menu-list"><a href="#" class="menu-link">News</a></li>
+    <li class="menu-list"><a href="#" class="menu-link">Team</a></li>
+    <li class="menu-list"><a href="{% url 'contacts' %}" {% if request.resolver_match.url_name == 'contacts' %}class="menu-link menu-link-active" {% else %}class="menu-link"{% endif %}>Contact Us</a></li>
+</ul>

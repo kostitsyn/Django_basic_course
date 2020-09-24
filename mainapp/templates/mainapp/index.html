@@ -1,0 +1,310 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block menu %}
+	<div class="slider">
+		<div class="header">
+			<div class="headerline">
+				<a class="logo" href="#"><p class="word_1">Historical</p><p class="word_2">games</p></a>
+				<div class="contacts">
+					<img class="phone" src="{% static 'img/first_screen/phone.png' %}" alt="phone"><span class="phone-text">+123 456 7890</span>
+					<img class="email" src="{% static 'img/first_screen/email.png' %}" alt="email"><span class="email-text">info@example.com</span>
+					<input class="search" type="text" placeholder="Search">
+					<div class="icon-search"><a href="#"><img src="{% static 'img/first_screen/search.png' %}" alt="search"></a></div>
+				</div>
+			</div>
+			{% include 'mainapp/includes/inc_main_menu.html' %}
+		</div>
+		<p class="slider-line"></p>
+		<div class="slider-text">
+			<p class="slider-text-first">Nunc eget nibh</p>
+			<p class="slider-text-line"></p>
+			<h1 class="slider-text-second">Morbi in nisl auctor</h1>
+			<div class="slider-links">
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/facebook.png' %}" alt="facebook"></a>
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/twitter.png' %}" alt="twitter"></a>
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/rss.png' %}" alt="rss"></a>
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/vk.png' %}" alt="vk"></a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block content %}
+	<div class="about">
+		<div class="about-paragraph">
+			<h3 class="about-header">About Us!</h3>
+			<p class="about-text">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit. Ut&nbsp;enim ad&nbsp;minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut&nbsp;aliquid ex&nbsp;ea&nbsp;commodi consequatur?<br><br>
+			Quis autem vel eum iure reprehenderit qui in&nbsp;ea&nbsp;voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+		</div>
+		<img class="about-image" src="{% static 'img/About_us/1.jpg' %}" alt="image">
+	</div>
+	<div class="services">
+		<h3 class="services-header">Services</h3>
+		<table class="services-table">
+			<tr>
+				<td>
+					<div class="serv-left-txt">
+						<h4 class="services-name services-name-active">Repreh Qui In Ea Voluptate</h4>
+						<p class="services-text">Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+						reiciendis voluptatibus maiores alias consequatur aut
+					perferendis doloribus asperiores repellat.</p>
+					</div>
+				</td>
+				<td>
+					<a href="#">
+						<div class="services-circle services-circle-active"><img class="services-img" src="{% static 'img/Services/branch.png' %}" alt="branch">
+						</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<div class="services-circle third-column"><img class="services-img" src="{% static 'img/Services/arrow.png' %}" alt="arrow"></div>
+					</a>
+				</td>
+				<td>
+					<div class="serv-right-txt">
+						<h4 class="services-name">Voluptatibus Maiores Alias</h4>
+						<p class="services-text">Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+						reiciendis voluptatibus maiores alias consequatur aut
+						perferendis doloribus asperiores repellat.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="serv-left-txt">
+						<h4 class="services-name">Aut Perferendis Doloribus</h4>
+						<p class="services-text">Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+						reiciendis voluptatibus maiores alias consequatur aut
+						perferendis doloribus asperiores repellat.</p>
+					</div>
+				</td>
+				<td class="services-circle-dollar">
+					<a href="#">
+						<div class="services-circle">$</div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<div class="services-circle"><img class="services-img" src="{% static 'img/Services/home.png' %}" alt="home"></div>
+					</a>
+				</td>
+				<td>
+					<div class="serv-right-txt"><h4 class="services-name">Dut Aut Reiciendis Maiores</h4>
+					<p class="services-text">Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+						reiciendis voluptatibus maiores alias consequatur aut
+					perferendis doloribus asperiores repellat.</p>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="serv-left-txt"><h4 class="services-name">Maiores Alias Consequatur</h4>
+					<p class="services-text">Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+					reiciendis voluptatibus maiores alias consequatur aut
+					perferendis doloribus asperiores repellat.</p>
+					</div>
+				</td>
+				<td>
+					<a href="#">
+						<div class="services-circle"><img class="services-img" src="{% static 'img/Services/chart.png' %}" alt="chart"></div>
+					</a>
+				</td>
+				<td>
+					<a href="#">
+						<div class="services-circle"><img class="services-img" src="{% static 'img/Services/set.png' %}" alt="set"></div>
+					</a>
+				</td>
+				<td>
+					<div class="serv-right-txt">
+						<h4 class="services-name">Doloribus Volupta Maiores</h4>
+						<p class="services-text">Itaque earum rerum hic tenetur a sapiente delectus, ut aut
+						reiciendis voluptatibus maiores alias consequatur aut
+						perferendis doloribus asperiores repellat.</p>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="gallery">
+		<h3 class="gallery-header">Our Gallery</h3>
+		<ul class="gallery-menu">
+			<li>
+				<div class="name-game"><a href="{% url 'assasin' %}"><img src="{% static 'img/Gallery/assasin.jpg' %}" alt="assasin"></a>
+					<div class="gallery-name-buy"><p>ASASSIN’S CREED: Rogue</p>
+						<input class="gallery-buy" type="button" value="Buy">
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="name-game"><a href="#"><img src="{% static 'img/Gallery/tomb.jpg' %}" alt="tomb"></a>
+					<div class="gallery-name-buy"><p>TOMB RAIDER</p>
+						<input class="gallery-buy" type="button" value="Buy">
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="name-game"><a href="#"><img src="{% static 'img/Gallery/ryse.jpg' %}" alt="ryse"></a>
+					<div class="gallery-name-buy"><p>RYSE: Son Of Rome</p>
+						<input class="gallery-buy" type="button" value="Buy">
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="name-game"><a href="#"><img src="{% static 'img/Gallery/warcraft.jpg' %}" alt="warcraft"></a>
+					<div class="gallery-name-buy"><p>WORLD OF WARCRAFT:<br>
+						Wrath Of The Linch King</p>
+						<input class="gallery-buy" type="button" value="Buy">
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="testimonial">
+		<h2 class="testimonial-header">Testimonial</h2>
+		<img class="quote" src="/static/img/block_6/quote.png" alt="quote">
+		<div class="testimonial-content">
+			<a class="previous" href="#"><p>&lt;</p></a>
+			<p class="testimonial-text">Donec feugiat tellus sem, laoreet iaculis orci lobortis vel. Sed sed luctus orci, at&nbsp;lacinia risus. Ut&nbsp;porttitor ante ac&nbsp;tincidunt elementum. Curabitur ex&nbsp;dolor, condimentum vitae nunc vel, pulvinar semper justo. Vestibulum et&nbsp;aliquet magna, maximus dapibus enim. Vestibulum ex&nbsp;lectus, posuere eu&nbsp;viverra at, mattis et&nbsp;enim. Nam efficitur sem et&nbsp;lectus fringilla, at&nbsp;pharetra nulla luctus. Nunc cursus, augue ac&nbsp;ultricies volutpat, neque erat congue justo, ac&nbsp;pretium tellus eros a&nbsp;neque. Integer ipsum sem,
+				consectetur a&nbsp;mollis ac, cursus eu&nbsp;ipsum.<br><br>
+			<b>JOHN SMITH</b>&nbsp;&mdash; FOUNDER</p>
+			<a class="next" href="#"><p>&gt;</p></a>
+		</div>
+	</div>
+	<div class="news clearfix">
+		<h3 class="news-header">News & Events</h3>
+		<div class="latest-news">
+			<p class="headers-news headers-news-1">Latest News</p>
+			<div class="one-news">
+				<div class="news-date">
+					<p class="day">15</p>
+					<p class="month">June</p>
+					<p class="year">2016</p>
+				</div>
+				<p class="name-news">Fugiat Quo Voluptas</p>
+				<p class="text-news">Quis autem vel eum iure reprehenderit qui in ea voluptate
+					velit esse.</p>
+			</div>
+			<div class="one-news">
+				<div class="news-date">
+					<p class="day">18</p>
+					<p class="month">June</p>
+					<p class="year">2016</p>
+				</div>
+				<p class="name-news">FugQui In Ea Voluptate</p>
+				<p class="text-news">Quis autem vel eum iure reprehenderit qui in ea voluptate
+					velit esse.</p>
+			</div>
+			<div class="one-news">
+				<div class="news-date">
+					<p class="day">20</p>
+					<p class="month">June</p>
+					<p class="year">2016</p>
+				</div>
+				<p class="name-news">Autem Vel Eum Iure</p>
+				<p class="text-news">Quis autem vel eum iure reprehenderit qui in ea voluptate
+					velit esse.</p>
+			</div>
+		</div>
+		<div class="featured-events">
+			<p class="headers-news">Featured Events</p>
+			<p class="arrows"><a href="">&lt;</a> <a href="">&gt;</a></p>
+			<p class="line-news"></p>
+			<div class="featured-img">
+				<img src="{% static 'img/block_7/3.jpg' %}" alt="image-news">
+				<img src="{% static 'img/block_7/2.jpg' %}" alt="image-news">
+				<img src="{% static 'img/block_7/1.jpg' %}" alt="image-news">
+			</div>
+			<div class="featured-parg">
+				<p class="parg-header"><a href="#">−   Assumenda Est Cliche Reprehenderit</a></p>
+				<p class="parg-text">Lorem Ipsum is&nbsp;simply dummy text of&nbsp;the printing and typesetting industry. Lorem Ipsum has been the industry&rsquo;s standard dummy text ever since the 1500s, when an&nbsp;unknown printer took a&nbsp;galley of&nbsp;type and scrambled it&nbsp;to&nbsp;make a&nbsp;type specimen book.</p>
+			</div>
+			<p class="parg-header-plus"><a href="#">+   Assumenda Est Cliche Reprehenderit</a></p>
+			<p class="parg-header-plus"><a href="#">+   Assumenda Est Cliche Reprehenderit</a></p>
+			<p class="parg-header-plus"><a href="#">+   Assumenda Est Cliche Reprehenderit</a></p>
+		</div>
+	</div>
+	<div class="team">
+		<h3 class="team-header">Our team</h3>
+		<ul class="team-people">
+			<li>
+				<div class="person"><img src="/static/img/Our_team/4.jpg" alt="person"><p class="name-person">Mary Jane</p><p class="position-person">Vestibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/3.jpg" alt="person"><p class="name-person">Peter Parker</p><p class="position-person">Vestibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/2.jpg" alt="person"><p class="name-person">John Watson</p><p class="position-person">Ves tibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/1.jpg" alt="person"><p class="name-person">Steven Wilson</p><p class="position-person">Ves tibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="arrow">
+			<a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+		</div>
+	</div>
+	<div class="subscribe">
+		<h2 class="subscribe-header">Subscribe with Us</h2>
+		<form action="#">
+			<input class="email-input" type="email" placeholder="Email">
+			<input class="subscribe-bottom" type="submit" value="Subscribe">
+		</form>
+	</div>
+	<div class="contact">
+		<h3 class="contact-header">Contact Us</h3>
+		<div class="contact-content">
+			<div class="contact-info">
+				<h4 class="contact-subheader">Get in touch with us</h4>
+				<p class="contact-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sheets
+					containing Lorem Ipsum passages sed do, At&nbsp;vero eos et&nbsp;accusamus et&nbsp;iusto odio digs qui blanditiis<br><br>
+					Leningradsky AVE 39, BLDG 79<br>
+					MOSCOW 125&thinsp;167, Russia<br><br>
+					Telephone: +00&thinsp;111&thinsp;222&thinsp;3333<br><br>
+					FAX: +1&thinsp;888&thinsp;888&thinsp;4444<br><br>
+					Email: <a href="#">mail@example.com</a>
+				</p>
+			</div>
+			<div class="contact-box">
+				<form action="#">
+					<input class="contact-name" type="text" placeholder="Name">
+					<input class="contact-email" type="email" placeholder="Email">
+					<textarea class="contact-message" placeholder="Massege"></textarea>
+					<input class="contact-bottom" type="submit" value="SUBMIT">
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="map">
+		<h3 class="map-header">Route Map</h3>
+		<div class="map-box"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.763121008914!2d37.5358139890497!3d55.797351034545684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54995cd1b0adf%3A0xfb771c396ac2a119!2zU2t5bGlnaHQsINCR0LjQt9C90LXRgS3RhtC10L3RgtGA!5e0!3m2!1sru!2sru!4v1594385910795!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+		</div>
+	</div>
+{% endblock %}

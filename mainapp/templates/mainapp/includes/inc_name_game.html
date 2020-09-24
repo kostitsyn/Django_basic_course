@@ -1,0 +1,12 @@
+{% load static %}
+<ul class="gallery-menu">
+    {% for item in name_game %}
+        <li>
+            <div class="name-game"><a href="{% url item.href %}"><img src="{% static 'img/catalog/'|add:item.img %}"  alt='{{ item.jpg }}'></a>
+                <div class="gallery-name-buy"><p>{{ item.name }}</p>
+                    <input class="gallery-buy" type="button" value="Buy">
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>

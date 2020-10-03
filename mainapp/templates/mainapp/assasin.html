@@ -1,0 +1,96 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block menu %}
+	<div class="header">
+		{% include 'mainapp/includes/inc_headerline.html' %}
+		{% include 'mainapp/includes/inc_main_menu.html' %}
+		<p class="slider-line"></p>
+	</div>
+{% endblock %}
+{% block content %}
+		<div class="game">
+			<div class="images">
+				<img class="main-img" src="{% static 'img/product_page/asassin_main.jpg' %}" alt="main">
+				<div class="more-img">
+					<img class="second-img" src="{% static 'img/product_page/assasin-1.jpg' %}" alt="img1">
+					<img class="other-img" src="{% static 'img/product_page/assasin-2.jpg' %}" alt="img2">
+					<img class="other-img" src="{% static 'img/product_page/assasin-3.jpg' %}" alt="img3">
+					<img class="other-img" src="{% static 'img/product_page/assasin-4.jpg' %}" alt="img4">
+				</div>
+			</div>
+			<div class="game-price">
+				<p class="name-game">Assasin’s Creed:<br><span>Rogue</span></p>
+				<p class="price">$29.99</p>
+				<input class="buy" type="button" value="Buy">
+			</div>
+			
+			<div class="game-description">
+				<p>The plot is&nbsp;set in&nbsp;a&nbsp;fictional history of&nbsp;real world events and follows the centuries-old struggle between the Assassins, who fight for peace with free will, and the Templars, who desire peace through control. The story is&nbsp;set in&nbsp;the mid-18th century during the Seven Years' War, and follows Shay Patrick Cormac, an&nbsp;Assassin-turned-Templar who hunts down former members of&nbsp;his Brotherhood after being betrayed by&nbsp;them. Gameplay in&nbsp;Rogue is&nbsp;very similar to&nbsp;that of&nbsp;Black Flag with a&nbsp;mixture of&nbsp;ship-based naval exploration and third-person land-based exploration with some new features.</p>
+			</div>
+		</div>
+		<div class="similar">
+			<h3 class="similar-header">Similar games</h3>
+			<ul class="gallery-menu">
+				<li>
+					<div class="name-game"><a href="#"><img src="{% static 'img/product_page/similar/1.jpg' %}" alt="MIDDLE-EARTH"></a>
+						<div class="gallery-name-buy"><p>MIDDLE-EARTH:<br>Shadow Of War</p>
+							<input class="gallery-buy" type="button" value="Buy">
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="name-game"><a href="#"><img src="{% static 'img/product_page/similar/2.jpg' %}" alt="DISHONORED 2"></a>
+						<div class="gallery-name-buy"><p>DISHONORED 2</p>
+							<input class="gallery-buy" type="button" value="Buy">
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="name-game"><a href="#"><img src="{% static 'img/product_page/similar/3.jpg' %}" alt="THIEF"></a>
+						<div class="gallery-name-buy"><p>THIEF</p>
+							<input class="gallery-buy" type="button" value="Buy">
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="name-game"><a href="#"><img src="{% static 'img/product_page/similar/4.jpg' %}" alt="HITMAN"></a>
+						<div class="gallery-name-buy"><p>HITMAN</p>
+							<input class="gallery-buy" type="button" value="Buy">
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="contact">
+			<h3 class="contact-header">Contact Us</h3>
+			<div class="contact-content">
+				<div class="contact-info">
+					<h4 class="contact-subheader">Get in touch with us</h4>
+					<p class="contact-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sheets
+						containing Lorem Ipsum passages sed do, At&nbsp;vero eos et&nbsp;accusamus et&nbsp;iusto odio digs qui blanditiis<br><br>
+						Leningradsky AVE 39, BLDG 79<br>
+						MOSCOW 125&thinsp;167, Russia<br><br>
+						Telephone: +00&thinsp;111&thinsp;222&thinsp;3333<br><br>
+						FAX: +1&thinsp;888&thinsp;888&thinsp;4444<br><br>
+						Email: <a href="#">mail@example.com</a>
+					</p>
+				</div>
+				<div class="contact-box">
+					<form action="#">
+						<input class="contact-name" type="text" placeholder="Name">
+						<input class="contact-email" type="email" placeholder="Email">
+						<textarea class="contact-message" placeholder="Massege"></textarea>
+						<input class="contact-bottom" type="submit" value="SUBMIT">
+					</form>
+				</div>
+			</div>
+			<div class="arrow">
+				<a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+			</div>
+		</div>
+		<div class="map">
+			<h3 class="map-header">Route Map</h3>
+			<div class="map-box"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.763121008914!2d37.5358139890497!3d55.797351034545684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54995cd1b0adf%3A0xfb771c396ac2a119!2zU2t5bGlnaHQsINCR0LjQt9C90LXRgS3RhtC10L3RgtGA!5e0!3m2!1sru!2sru!4v1594385910795!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+			</div>
+		</div>
+{% endblock %}

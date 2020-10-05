@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+            {% block title %}
+                {{ name_page|title }}
+            {% endblock %}
+        </title>
+        {% block css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'style/'|add:css_file %}">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+	    {% endblock %}
+    </head>
+	<body>
+		<div class="container">
+                <!--{% block headerline %}
+                    <div class="headerline">
+			        <a class="logo" href="#"><p class="word_1">Historical</p><p class="word_2">games</p></a>
+			            <div class="contacts">
+                            <img class="phone" src="{% static 'img/first_screen/phone.png' %}" alt="phone"><span class="phone-text">+123 456 7890</span>
+                            <img class="email" src="{% static 'img/first_screen/email.png' %}" alt="email"><span class="email-text">info@example.com</span>
+                            <input class="search" type="text" placeholder="Search">
+				            <div class="icon-search"><a href="#"><img src="{% static 'img/first_screen/search.png' %}" alt="search"></a></div>
+			            </div>
+		            </div>
+                {% endblock %}-->
+            {% block menu %}
+            {% endblock %}
+
+            {% block content %}
+			{% endblock %}
+        </div>
+        {% block footer %}
+            <div class="footer">
+                <div class="arrow">
+                    <a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+                </div>
+                <p>&copy; {% now "Y" %} Историческе Игры. Все права защищены</p>
+            </div>
+        {% endblock %}
+	</body>
+</html>

@@ -23,6 +23,6 @@ app_name = 'mainapp'
 
 urlpatterns = [
     path('', mainapp.gallery, name='gallery_main'),
-    path('<int:pk>/', mainapp.gallery, name='category'),
-    path('<str:pk>/', mainapp.product, name='game'),
+    path('category/<int:pk>', mainapp.gallery, name='category'),
+    path('product/<str:pk>', mainapp.product, name='game'),
 ]

@@ -61,9 +61,11 @@
     {% endif %}
     <li class="menu-list">
         <a href="{% url 'basket:basket' %}"
-           {% if request.resolver_match.url_name == 'contacts' %}class="menu-link menu-link-active basket"
-           {% else %}class="menu-link basket"{% endif %}>
-            {% if basket %} {{ basket }} {% endif %}
+           class="menu-link basket">
+            {% if basket %}
+                {{ basket.0.total_cost|floatformat:0 }} $
+                ({{ basket.0.total_quantity }} шт)
+            {% endif %}
         </a>
     </li>
 </ul>

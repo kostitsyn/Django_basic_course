@@ -1,0 +1,11 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block menu %}
+	<div class="header">
+		{% include 'mainapp/includes/inc_headerline.html' %}
+		{% include 'mainapp/includes/inc_main_menu.html' %}
+		<p class="slider-line"></p>
+        {% include 'mainapp/includes/inc_contacts.html' %}
+	</div>
+{% endblock %}
+

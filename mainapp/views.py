@@ -74,7 +74,7 @@ def gallery(request, pk=None):
         return render(request, 'mainapp/games_list.html', content)
 
     hot_product = get_hot_product()
-    game_list = list(Games.objects.all().exclude(pk=hot_product.pk))
+    # game_list = list(Games.objects.all().exclude(pk=hot_product.pk))
     # result_list = get_required_obj(game_list, 8)
 
     game_discount = list(DiscountGames.objects.all())

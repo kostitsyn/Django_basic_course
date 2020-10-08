@@ -6,6 +6,10 @@ from basketapp.models import Basket
 from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
 
+def get_hot_product():
+    games_list = Games.objects.all()
+    return random.sample(list(games_list), 1)[0]
+
 def get_required_obj(lst, num, max_num=0):
     my_list = []
     i = 1
@@ -18,6 +22,10 @@ def get_required_obj(lst, num, max_num=0):
     return my_list
 
 def main(request, pk=None):
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+
     contact_data = Contacts.objects.get(pk=1)
     game_list = list(Games.objects.all())
     result_list = get_required_obj(game_list, 4)
@@ -25,7 +33,8 @@ def main(request, pk=None):
         'name_page': 'historical games',
         'css_file': 'style-index.css',
         'games': result_list,
-        'contact_data': contact_data
+        'contact_data': contact_data,
+        'basket': basket
     }
     return render(request, 'mainapp/index.html', content)
 
@@ -42,7 +51,10 @@ def gallery(request, pk=None):
 
     links_menu = GameCategories.objects.all()
 
-    basket = sum(list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True)))
+    # basket = list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True))
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
 
     if pk is not None:
         if pk == 0:
@@ -57,11 +69,12 @@ def gallery(request, pk=None):
                    'links_menu': links_menu,
                    'category': category,
                    'games': games,
-                   'basket': basket
+                   'basket': basket,
                    }
         return render(request, 'mainapp/games_list.html', content)
 
-    game_list = list(Games.objects.all())
+    hot_product = get_hot_product()
+    game_list = list(Games.objects.all().exclude(pk=hot_product.pk))
     # result_list = get_required_obj(game_list, 8)
 
     game_discount = list(DiscountGames.objects.all())
@@ -73,7 +86,8 @@ def gallery(request, pk=None):
         'games': game_list,
         'games_discount': result_list_discount,
         'links_menu': links_menu,
-        'basket': basket
+        'basket': basket,
+        # 'hot_product': hot_product
     }
     return render(request, 'mainapp/gallery.html', content)
 
@@ -85,25 +99,35 @@ def team(request):
 
 def contacts(request):
     contact_data = Contacts.objects.get(pk=1)
+
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+
     content = {
         'name_page': 'contacts',
         'css_file': 'style-contacts.css',
-        'contact_data': contact_data
+        'contact_data': contact_data,
+        'basket': basket
     }
     return render(request, 'mainapp/contacts.html', content)
 
-def assasin(request):
-    content = {
-        'name_page': 'assasin game',
-        'css_file': 'style-product-page.css'
-    }
-    return render(request, 'mainapp/assasin.html', content)
+# def assasin(request):
+#     content = {
+#         'name_page': 'assasin game',
+#         'css_file': 'style-product-page.css'
+#     }
+#     return render(request, 'mainapp/assasin.html', content)
 
 def product(request, pk=None):
     contact_data = Contacts.objects.get(pk=1)
 
 
-    basket = sum(list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True)))
+    # basket = sum(list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True)))
+
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
 
     game = Games.objects.get(name=pk)
     category = game.game_category

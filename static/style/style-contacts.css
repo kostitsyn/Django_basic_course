@@ -163,7 +163,7 @@ body {
 .menu {
   padding-top: 32px;
   text-align: center;
-  padding-bottom: 29px;
+  padding-bottom: 37px;
 }
 
 .menu-list {
@@ -190,7 +190,7 @@ body {
 
 .menu-link-active {
   border-bottom: 3px solid #000000;
-  padding-bottom: 29px;
+  padding-bottom: 37px;
   color: #000000;
 }
 
@@ -645,14 +645,14 @@ body {
   .menu {
     padding-top: 32px;
     text-align: center;
-    padding-bottom: 29px;
+    padding-bottom: 37px;
   }
   .images {
     width: 360px;
   }
   .menu-link-active {
-    border-bottom: 3px solid #000000;
-    color: #000000;
+    /*border-bottom: 3px solid #000000;
+    color: #000000;*/
   }
   .game-price {
     width: 432px;

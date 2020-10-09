@@ -19,6 +19,7 @@
 				</div>
 			</div>
 			<div class="game-price">
+				<p class="name-game" style="color: orange">{{ game.game_category.name|upper }}</p>
 				<p class="name-game">{{ game.name }}</p>
 				<p class="price">${{ game.price }}</p>
 				<a href="{% url 'basket:add' game.pk %}"><input class="buy" type="button" value="Buy"></a>

@@ -12,6 +12,18 @@
     {% include 'mainapp/includes/inc_categories_game.html' %}
 	<div class="gallery clearfix">
 		<h3 class="gallery-header">Категория: "{{ category.name|title }}"</h3>
+        <div class="gallery clearfix">
+        <ul class="gallery-menu">
+            <li>
+                <div class="name-game"><a href="{% url 'gallery:game' hot_product.name %}"><img src="/media/{{ hot_product.image }}"  alt='{{ hot_product.name }}'></a>
+                    <div class="gallery-name-buy"><p>{{ hot_product.name }}</p>
+                        <span>Горячее предложение!</span>
+                        <a href="{% url 'basket:add' hot_product.pk %}"><input class="gallery-buy" type="button" value="Buy"></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <p>{{ hot_product.description }}</p>
 		{% include 'mainapp/includes/inc_name_game.html' %}
 
 		<a href="#"><p class="button-more"><span>Show more games</span></p></a>

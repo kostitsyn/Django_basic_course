@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
+from django.urls import reverse
 
 import basketapp
 from basketapp.models import Basket
@@ -19,6 +20,9 @@ def basket(request):
 
 @login_required
 def basket_add(request, pk):
+    if 'login' in request.META.get('HTTP_REFERER'):
+        game_name = Games.objects.get(pk=pk).name
+        return HttpResponseRedirect(reverse('gallery:game', args=[game_name]))
     product_item = get_object_or_404(Games, pk=pk)
 
     basket_item = Basket.objects.filter(product=product_item, user=request.user).first()

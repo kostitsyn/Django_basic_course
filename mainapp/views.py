@@ -10,6 +10,12 @@ def get_hot_product():
     games_list = Games.objects.all()
     return random.sample(list(games_list), 1)[0]
 
+
+def get_basket(user):
+    if user.is_authenticated:
+        return Basket.objects.filter(user=user)
+    return []
+
 def get_required_obj(lst, num, max_num=0):
     my_list = []
     i = 1
@@ -22,9 +28,6 @@ def get_required_obj(lst, num, max_num=0):
     return my_list
 
 def main(request, pk=None):
-    basket = []
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
 
     contact_data = Contacts.objects.get(pk=1)
     game_list = list(Games.objects.all())
@@ -34,7 +37,7 @@ def main(request, pk=None):
         'css_file': 'style-index.css',
         'games': result_list,
         'contact_data': contact_data,
-        'basket': basket
+        'basket': get_basket(request.user)
     }
     return render(request, 'mainapp/index.html', content)
 
@@ -52,15 +55,12 @@ def gallery(request, pk=None):
     links_menu = GameCategories.objects.all()
 
     # basket = list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True))
-    basket = []
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
+
 
     if pk is not None:
         if pk == 0:
             games = Games.objects.all()
             category = {'name': 'все'}
-            hot_product = get_hot_product()
         else:
             category = get_object_or_404(GameCategories, pk=pk)
             games = Games.objects.filter(game_category=category).order_by('name')
@@ -70,13 +70,14 @@ def gallery(request, pk=None):
                    'links_menu': links_menu,
                    'category': category,
                    'games': games,
-                   'basket': basket,
-                   'hot_product': hot_product
+                   'basket': get_basket(request.user),
+                   'hot_product': get_hot_product()
                    }
         return render(request, 'mainapp/games_list.html', content)
 
     hot_product = get_hot_product()
     game_list = list(Games.objects.all().exclude(pk=hot_product.pk))
+    # result_list = get_required_obj(game_list, 8)
 
     game_discount = list(DiscountGames.objects.all())
     result_list_discount = get_required_obj(game_discount, 2)
@@ -87,7 +88,7 @@ def gallery(request, pk=None):
         'games': game_list,
         'games_discount': result_list_discount,
         'links_menu': links_menu,
-        'basket': basket,
+        'basket': get_basket(request.user),
         'hot_product': hot_product
     }
     return render(request, 'mainapp/gallery.html', content)
@@ -101,15 +102,12 @@ def team(request):
 def contacts(request):
     contact_data = Contacts.objects.get(pk=1)
 
-    basket = []
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
 
     content = {
         'name_page': 'contacts',
         'css_file': 'style-contacts.css',
         'contact_data': contact_data,
-        'basket': basket
+        'basket': get_basket(request.user)
     }
     return render(request, 'mainapp/contacts.html', content)
 
@@ -123,24 +121,18 @@ def contacts(request):
 def product(request, pk=None):
     contact_data = Contacts.objects.get(pk=1)
 
-
     # basket = sum(list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True)))
 
-    basket = []
-    if request.user.is_authenticated:
-        basket = Basket.objects.filter(user=request.user)
-
-    game = Games.objects.get(name=pk)
+    game = get_object_or_404(Games, name=pk)
     category = game.game_category
-    similar_games_list = list(Games.objects.filter(game_category=category))
-    similar_games_list.remove(game)
+    similar_games_list = list(Games.objects.filter(game_category=category).exclude(pk=game.pk))
     result_list_similar = get_required_obj(similar_games_list, len(similar_games_list), 4)
     content = {
         'name_page': game.name,
         'game': game,
         'css_file': 'style-product-page.css',
-         'games': result_list_similar,
+        'games': result_list_similar,
         'contact_data': contact_data,
-        'basket': basket
+        'basket': get_basket(request.user)
     }
     return render(request, 'mainapp/product.html', content)

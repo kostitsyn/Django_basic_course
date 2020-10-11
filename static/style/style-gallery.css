@@ -219,6 +219,12 @@ text-align: center;
   width: 271px;
 }
 
+.hot_offer span {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
 .gallery-name-buy {
   min-height: 105px;
   margin-top: -4px;
@@ -237,6 +243,7 @@ text-align: center;
   margin-top: 17px;
   min-height: 46px;
 }
+
 
 .gallery-buy {
   width: 130px;

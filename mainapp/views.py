@@ -60,6 +60,7 @@ def gallery(request, pk=None):
         if pk == 0:
             games = Games.objects.all()
             category = {'name': 'все'}
+            hot_product = get_hot_product()
         else:
             category = get_object_or_404(GameCategories, pk=pk)
             games = Games.objects.filter(game_category=category).order_by('name')
@@ -70,12 +71,12 @@ def gallery(request, pk=None):
                    'category': category,
                    'games': games,
                    'basket': basket,
+                   'hot_product': hot_product
                    }
         return render(request, 'mainapp/games_list.html', content)
 
     hot_product = get_hot_product()
-    # game_list = list(Games.objects.all().exclude(pk=hot_product.pk))
-    # result_list = get_required_obj(game_list, 8)
+    game_list = list(Games.objects.all().exclude(pk=hot_product.pk))
 
     game_discount = list(DiscountGames.objects.all())
     result_list_discount = get_required_obj(game_discount, 2)
@@ -87,7 +88,7 @@ def gallery(request, pk=None):
         'games_discount': result_list_discount,
         'links_menu': links_menu,
         'basket': basket,
-        # 'hot_product': hot_product
+        'hot_product': hot_product
     }
     return render(request, 'mainapp/gallery.html', content)
 

@@ -169,12 +169,12 @@ def product_create(request, pk):
     category_item = GameCategories.objects.get(pk=pk)
 
     if request.method == 'POST':
-        product_form = GameReadForm(request.POST, request.FILES)
+        product_form = GameEditForm(request.POST, request.FILES)
         if product_form.is_valid():
             product_form.save()
             return HttpResponseRedirect(reverse('admin:categories'))
     else:
-        product_form = ProductCategoryEditForm()
+        product_form = GameEditForm()
     content = {
         'name_page': 'продукты/создание',
         'update_form': product_form,

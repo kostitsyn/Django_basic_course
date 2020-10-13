@@ -47,5 +47,5 @@ class Command(BaseCommand):
         for contact in contacts:
             Contacts.objects.create(**contact)
 
-        #ShopUser.objects.create_superuser(username='django', email=None, password='geekbrains', age=30)
+        ShopUser.objects.create_superuser(username='django', email=None, password='geekbrains', age=30)
 

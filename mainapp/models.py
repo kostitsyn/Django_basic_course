@@ -3,6 +3,8 @@ from django.db import models
 
 class GameCategories(models.Model):
     name = models.CharField(max_length=64, unique=True, verbose_name='название категории')
+    description = models.TextField(blank=True, verbose_name='описание')
+    is_active = models.BooleanField(verbose_name='активна', default=True)
 
     class Meta:
         verbose_name = 'категория'
@@ -18,6 +20,8 @@ class Games(models.Model):
     image = models.ImageField(upload_to='game_images')
     description = models.TextField(blank=True, verbose_name='описание')
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    quantity = models.PositiveSmallIntegerField(default=0)
+    is_active = models.BooleanField(verbose_name='активна', default=True)
 
     class Meta:
         verbose_name = 'игра'
@@ -34,6 +38,7 @@ class DiscountGames(models.Model):
     description = models.TextField(blank=True, verbose_name='описание')
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     old_price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    is_active = models.BooleanField(verbose_name='активна', default=True)
 
     class Meta:
         verbose_name = 'игра со скидкой'
@@ -49,6 +54,7 @@ class Contacts(models.Model):
     phone = models.CharField(max_length=40, verbose_name='телефон')
     fax = models.CharField(max_length=40, verbose_name='факс')
     email = models.EmailField(verbose_name='почта')
+    is_active = models.BooleanField(verbose_name='активна', default=True)
 
     def __str__(self):
         return self.address

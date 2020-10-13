@@ -1,5 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
 <html lang="ru">
 	<head>
 		<meta charset="UTF-8">
@@ -9,11 +8,7 @@
             {% endblock %}
         </title>
         {% block css %}
-            {% if request.resolver_match.url_name == 'contacts' %}
-                <link rel="stylesheet" type="text/css" href="{% static 'style/style-contacts.css' %}">
-            {% else %}
-                <link rel="stylesheet" type="text/css" href="{% static 'style/'|add:css_file %}">
-            {% endif %}
+            <link rel="stylesheet" type="text/css" href="{% static 'style/'|add:css_file %}">
             <link rel="stylesheet" type="text/css" href="{% static 'style/css/bootstrap.min.css' %}">
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
 	    {% endblock %}

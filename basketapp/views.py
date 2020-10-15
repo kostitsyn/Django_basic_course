@@ -28,29 +28,29 @@ class BasketListView(ListView):
 #     return render(request, 'basketapp/basket.html', content)
 
 
-class BasketUpdateView(UpdateView):
-    model = Basket
-    template_name = HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-    success_url = reverse_lazy(request.META.get('HTTP_REFERER'))
-    fields = '__all__'
+# class BasketUpdateView(UpdateView):
+#     model = Basket
+#     template_name = HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+#     success_url = reverse_lazy(request.META.get('HTTP_REFERER'))
+#     fields = '__all__'
 
 
-# @login_required
-# def basket_add(request, pk):
-#     if 'login' in request.META.get('HTTP_REFERER'):
-#         game_name = Games.objects.get(pk=pk).name
-#         return HttpResponseRedirect(reverse('gallery:game', args=[game_name]))
-#     product_item = get_object_or_404(Games, pk=pk)
-#
-#     basket_item = Basket.objects.filter(product=product_item, user=request.user).first()
-#
-#     if not basket_item:
-#         basket_item = Basket.objects.create(product=product_item, user=request.user)
-#
-#     basket_item.quantity += 1
-#     basket_item.save()
-#
-#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+@login_required
+def basket_add(request, pk):
+    if 'login' in request.META.get('HTTP_REFERER'):
+        game_name = Games.objects.get(pk=pk).name
+        return HttpResponseRedirect(reverse('gallery:game', args=[game_name]))
+    product_item = get_object_or_404(Games, pk=pk)
+
+    basket_item = Basket.objects.filter(product=product_item, user=request.user).first()
+
+    if not basket_item:
+        basket_item = Basket.objects.create(product=product_item, user=request.user)
+
+    basket_item.quantity += 1
+    basket_item.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required

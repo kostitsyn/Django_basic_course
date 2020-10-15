@@ -8,7 +8,7 @@
         {% else %}
             Уверены, что хотите восстановить категорию <strong>{{ object.name }}</strong>?
         {% endif %}
-      <form action="{% url 'admin:category_delete' category_to_delete.pk %}"
+      <form action="{% url 'admin:category_delete' object.pk %}"
             method="post">
         {% csrf_token %}
           {% if object.is_active %}

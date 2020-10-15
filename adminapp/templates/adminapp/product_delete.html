@@ -3,14 +3,22 @@
 
 {% block content %}
     <div class="category_delete">
-        Уверены, что хотите удалить игру <strong>{{ product_to_delete.name }}</strong>?
-      <form action="{% url 'admin:product_delete' product_to_delete.pk %}"
+        {% if object.is_active %}
+            Уверены, что хотите удалить игру <strong>{{ object.name }}</strong>?
+        {% else %}
+            Уверены, что хотите восстановить игру <strong>{{ object.name }}</strong>?
+        {% endif %}
+      <form action="{% url 'admin:product_delete' object.pk %}"
             method="post">
         {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="удалить">
+        {% if object.is_active %}
+            <input class="btn btn-danger" type="submit" value="удалить">
+          {% else %}
+            <input class="btn btn-danger" type="submit" value="восстановить">
+          {% endif %}
       </form>
       <button class="btn btn-success">
-        <a href="{% url 'admin:products' category.pk  %}">
+        <a href="{% url 'admin:products' object.game_category.pk 1 %}">
           Отмена
         </a>
       </button>

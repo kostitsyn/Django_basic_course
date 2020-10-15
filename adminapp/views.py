@@ -99,7 +99,7 @@ def user_delete(request, pk):
 class ProductCategoryCreateView(CreateView):
     model = GameCategories
     template_name = 'adminapp/category_update.html'
-    success_url = reverse_lazy('admin:categories')
+    success_url = reverse_lazy('admin:categories', args=[1])
     form_class = ProductCategoryEditForm
 
 
@@ -125,33 +125,69 @@ class ProductCategoryCreateView(CreateView):
 #     }
 #     return render(request, 'adminapp/category_update.html', content)
 
+class ProductCategoriesListView(ListView):
+    model = GameCategories
+    template_name = 'adminapp/categories.html'
 
-@user_passes_test(lambda u: u.is_superuser)
-def categories(request, page=1):
-    categories_list = GameCategories.objects.all()
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
-    paginator = Paginator(categories_list, 3)
-    try:
-        categories_paginator = paginator.page(page)
-    except PageNotAnInteger:
-        categories_paginator = paginator.page(1)
-    except EmptyPage:
-        categories_paginator = paginator.page(paginator.num_pages)
-    content = {
-        'name_page': 'админка/категории',
-        'objects': categories_paginator,
-    }
-    return render(request, 'adminapp/categories.html', content)
+    def get_queryset(self):
+        categories_list = GameCategories.objects.all()
+        return categories_list
+
+    def get_context_data(self, page=1, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        categories_list = super().get_queryset()
+
+
+        paginator = Paginator(categories_list, 2)
+        try:
+            categories_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            categories_paginator = paginator.page(1)
+        except EmptyPage:
+            categories_paginator = paginator.page(paginator.num_pages)
+
+        context_data['object_list'] = categories_paginator
+
+        return context_data
+
+
+
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def categories(request, page=1):
+#     categories_list = GameCategories.objects.all()
+#
+#     paginator = Paginator(categories_list, 3)
+#     try:
+#         categories_paginator = paginator.page(page)
+#     except PageNotAnInteger:
+#         categories_paginator = paginator.page(1)
+#     except EmptyPage:
+#         categories_paginator = paginator.page(paginator.num_pages)
+#
+#     content = {
+#         'name_page': 'админка/категории',
+#         'objects': categories_paginator,
+#     }
+#     return render(request, 'adminapp/categories.html', content)
 
 
 
 class ProductCategoryUpdateView(UpdateView):
     model = GameCategories
     template_name = 'adminapp/category_update.html'
-    success_url = reverse_lazy('admin:categories')
+    success_url = reverse_lazy('admin:categories', args=[1])
     form_class = ProductCategoryEditForm
 
 
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -182,88 +218,106 @@ class ProductCategoryUpdateView(UpdateView):
 #     return render(request, 'adminapp/category_update.html', content)
 
 
-# class ProductCategoryDeleteView(DeleteView):
-#     model = GameCategories
-#     template_name = 'adminapp/category_delete.html'
-#     success_url = reverse_lazy('admin:categories')
-#
-#     def get_context_data(self, **kwargs):
-#         context_data = super().get_context_data(**kwargs)
-#         context_data['css_file'] = ['style-index.css', 'bootstrap.min.css']
-#         return context_data
-#
-#
-#
-#     def delete(self, request, *args, **kwargs):
-#         self.object = self.get_object()
-#
-#         products_of_category = Games.objects.filter(game_category=self.object.pk)
-#
-#         if request.method == 'POST' and self.object.is_active:
-#             self.object.is_active = False
-#             self.object.save()
-#             for item in products_of_category:
-#                 item.is_active = False
-#                 item.save()
-#             return HttpResponseRedirect(self.get_success_url())
-#         else:
-#             if self.object.is_active == False:
-#                 self.object.is_active = True
-#                 self.object.save()
-#                 for item in products_of_category:
-#                     item.is_active = True
-#                     item.save()
-#                 return HttpResponseRedirect(self.get_success_url())
+class ProductCategoryDeleteView(DeleteView):
+    model = GameCategories
+    template_name = 'adminapp/category_delete.html'
+    success_url = reverse_lazy('admin:categories', args=[1])
 
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
-@user_passes_test(lambda u: u.is_superuser)
-def category_delete(request, pk):
-    category_item = get_object_or_404(GameCategories, pk=pk)
-    products_of_category = Games.objects.filter(game_category=category_item.pk)
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['css_file'] = ['style-index.css', 'bootstrap.min.css']
+        return context_data
 
-    if request.method == 'POST' and category_item.is_active:
-        category_item.is_active = False
-        category_item.save()
-        for item in products_of_category:
-            item.is_active = False
-            item.save()
-        return HttpResponseRedirect(reverse('admin:categories'))
-    else:
-        if category_item.is_active == False:
-            category_item.is_active = True
-            category_item.save()
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        products_of_category = Games.objects.filter(game_category=self.object.pk)
+
+        if request.method == 'POST' and self.object.is_active:
+            self.object.is_active = False
+            self.object.save()
             for item in products_of_category:
-                item.is_active = True
+                item.is_active = False
                 item.save()
-            return HttpResponseRedirect(reverse('admin:categories'))
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            if self.object.is_active == False:
+                self.object.is_active = True
+                self.object.save()
+                for item in products_of_category:
+                    item.is_active = True
+                    item.save()
+                return HttpResponseRedirect(self.get_success_url())
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def category_delete(request, pk):
+#     category_item = get_object_or_404(GameCategories, pk=pk)
+#     products_of_category = Games.objects.filter(game_category=category_item.pk)
+#
+#     if request.method == 'POST' and category_item.is_active:
+#         category_item.is_active = False
+#         category_item.save()
+#         for item in products_of_category:
+#             item.is_active = False
+#             item.save()
+#         return HttpResponseRedirect(reverse('admin:categories'))
+#     else:
+#         if category_item.is_active == False:
+#             category_item.is_active = True
+#             category_item.save()
+#             for item in products_of_category:
+#                 item.is_active = True
+#                 item.save()
+#             return HttpResponseRedirect(reverse('admin:categories'))
+#
+#
+#
+#     content = {'name_page': 'категории/удаление',
+#                'category_to_delete': category_item
+#                }
+#     return render(request, 'adminapp/category_delete.html', content)
 
 
 
-    content = {'name_page': 'категории/удаление',
-               'category_to_delete': category_item
-               }
-    return render(request, 'adminapp/category_delete.html', content)
+class ProductCreateView(CreateView):
+    model = Games
+    template_name = 'adminapp/product_update.html'
+    success_url = reverse_lazy('admin:products', args=[1, 1])
+    form_class = GameEditForm
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['css_file'] = ['style-index.css', 'bootstrap.min.css']
+        return context_data
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def product_create(request, pk):
-    css_file = ['style-index.css', 'bootstrap.min.css']
-    category_item = GameCategories.objects.get(pk=pk)
-
-    if request.method == 'POST':
-        product_form = GameEditForm(request.POST, request.FILES)
-        if product_form.is_valid():
-            product_form.save()
-            return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
-    else:
-        product_form = GameEditForm(initial={'game_category': category_item})
-    content = {
-        'name_page': 'продукты/создание',
-        'update_form': product_form,
-        'css_file': css_file,
-        'category': category_item,
-    }
-    return render(request, 'adminapp/product_update.html', content)
+# @user_passes_test(lambda u: u.is_superuser)
+# def product_create(request, pk):
+#     css_file = ['style-index.css', 'bootstrap.min.css']
+#     category_item = GameCategories.objects.get(pk=pk)
+#
+#     if request.method == 'POST':
+#         product_form = GameEditForm(request.POST, request.FILES)
+#         if product_form.is_valid():
+#             product_form.save()
+#             return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
+#     else:
+#         product_form = GameEditForm(initial={'game_category': category_item})
+#     content = {
+#         'name_page': 'продукты/создание',
+#         'update_form': product_form,
+#         'css_file': css_file,
+#         'category': category_item,
+#     }
+#     return render(request, 'adminapp/product_update.html', content)
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -340,24 +394,56 @@ def product_update(request, pk):
     return render(request, 'adminapp/product_update.html', content)
 
 
-@user_passes_test(lambda u: u.is_superuser)
-def product_delete(request, pk):
-    product_item = get_object_or_404(Games, pk=pk)
-    category_item = GameCategories.objects.get(name=product_item.game_category)
-
-    if request.method == 'POST' and product_item.is_active:
-        product_item.is_active = False
-        product_item.save()
-        return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
-    else:
-        if product_item.is_active == False:
-            product_item.is_active = True
-            product_item.save()
-            return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
 
 
-    content = {'name_page': 'игры/удаление',
-               'product_to_delete': product_item,
-               'category': category_item,
-               }
-    return render(request, 'adminapp/product_delete.html', content)
+
+class ProductDeleteView(DeleteView):
+    model = Games
+    template_name = 'adminapp/product_delete.html'
+    success_url = reverse_lazy('admin:products', args=[1, 1])
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['css_file'] = ['style-index.css', 'bootstrap.min.css']
+        return context_data
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if request.method == 'POST' and self.object.is_active:
+            self.object.is_active = False
+            self.object.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            if self.object.is_active == False:
+                self.object.is_active = True
+                self.object.save()
+                return HttpResponseRedirect(self.get_success_url())
+
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def product_delete(request, pk):
+#     product_item = get_object_or_404(Games, pk=pk)
+#     category_item = GameCategories.objects.get(name=product_item.game_category)
+#
+#     if request.method == 'POST' and product_item.is_active:
+#         product_item.is_active = False
+#         product_item.save()
+#         return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
+#     else:
+#         if product_item.is_active == False:
+#             product_item.is_active = True
+#             product_item.save()
+#             return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
+#
+#
+#     content = {'name_page': 'игры/удаление',
+#                'product_to_delete': product_item,
+#                'category': category_item,
+#                }
+#     return render(request, 'adminapp/product_delete.html', content)

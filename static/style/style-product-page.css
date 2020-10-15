@@ -6,6 +6,8 @@
 }
 
 
+
+
 body {
   font-family: 'Poppins', sans-serif;
   font-family: 'Roboto Condensed', sans-serif;
@@ -231,7 +233,8 @@ body {
 
 .main-img {
   display: inline-block;
-  width: 70%;
+  width: 306px;
+  height: 476px;
 }
 
 .more-img {
@@ -256,6 +259,11 @@ body {
   vertical-align: top;
   margin-left: 30px;
   width: 540px;
+}
+
+.game_image {
+    width: 271px;
+    height: 376px;
 }
 
 .name-game {

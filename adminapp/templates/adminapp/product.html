@@ -1,13 +1,14 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block content %}
-  <div>Категория: {{ objects.game_category }}</div>
-  <div>Название: {{ objects.name }}</div>
-  <div><img src="/media/{{ objects.image }}"  alt='{{ objects.name }}'></div>
-  <div>Описание: {{ objects.description }}</div>
-  <div>Цена: {{ objects.price }}</div>
-  <div>Количество: {{ objects.quantity }}</div>
+  <div>Категория: {{ object.game_category }}</div>
+  <div>Название: {{ object.name }}</div>
+  <div><img src="{{ object.image|media_folder_products }}"  alt='{{ objects.name }}'></div>
+  <div>Описание: {{ object.description }}</div>
+  <div>Цена: {{ object.price }}</div>
+  <div>Количество: {{ object.quantity }}</div>
     <button class="btn btn-round form-control last">
     <a href="{% url 'admin:products' category.pk %}">
       к списку игр категории

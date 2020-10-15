@@ -15,7 +15,7 @@
            {% else %}class="menu-link"{% endif %}>Service</a>
     </li>
     <li class="menu-list">
-        <a href="{% url 'gallery:gallery_main' %}"
+        <a href="{% url 'gallery:gallery_main' 1 %}"
            {% if request.resolver_match.namespace == 'gallery' %}class="menu-link menu-link-active"
            {% else %}class="menu-link"{% endif %}>Gallery</a>
     </li>

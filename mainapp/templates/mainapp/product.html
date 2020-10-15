@@ -1,6 +1,8 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
 {% block menu %}
+{% load my_tags %}
+
 	<div class="header">
 		{% include 'mainapp/includes/inc_headerline.html' %}
 		{% include 'mainapp/includes/inc_main_menu.html' %}
@@ -10,7 +12,7 @@
 {% block content %}
 		<div class="game">
 			<div class="images">
-				<img class="main-img" src="/media/{{ game.image }}" alt="{{ game.image }}">
+				<img class="main-img" src="{{ game.image|media_folder_users }}" alt="{{ game.image }}">
 				<div class="more-img">
 					<img class="second-img" src="{% static 'img/product_page/assasin-1.jpg' %}" alt="img1">
 					<img class="other-img" src="{% static 'img/product_page/assasin-2.jpg' %}" alt="img2">

@@ -451,6 +451,11 @@ text-align: center;
   width: 271px;
 }
 
+.game_image {
+    width: 271px;
+    height: 376px;
+}
+
 .gallery-name-buy {
   min-height: 105px;
   background-color: #f7f7f7;

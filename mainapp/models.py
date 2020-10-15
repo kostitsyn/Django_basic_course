@@ -17,7 +17,7 @@ class GameCategories(models.Model):
 class Games(models.Model):
     game_category = models.ForeignKey(GameCategories, on_delete=models.CASCADE)
     name = models.CharField(max_length=64, unique=True, verbose_name='название')
-    image = models.ImageField(upload_to='game_images')
+    image = models.ImageField(upload_to='game_images', blank=True)
     description = models.TextField(blank=True, verbose_name='описание')
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     quantity = models.PositiveSmallIntegerField(default=0)

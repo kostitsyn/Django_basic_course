@@ -23,6 +23,10 @@ body {
   clear: both;
 }
 
+.hot_image, .game_image {
+  width: 271px;
+  height: 376px;
+}
 
 
 /*header*/

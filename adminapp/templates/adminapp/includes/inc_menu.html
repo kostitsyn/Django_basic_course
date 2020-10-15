@@ -13,7 +13,7 @@
     </a>
   </li>
   <li>
-    <a href="{% url 'admin:categories' %}"
+    <a href="{% url 'admin:categories' 1 %}"
        class="{% if request.resolver_match.url_name == 'categories' or category.name %} active {% endif %}">
       {% if request.resolver_match.url_name == 'categories' or request.resolver_match.url_name == 'users' %} категории {% else %} категория {% endif %}
       {% if category %}

@@ -1,0 +1,17 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div>Категория: {{ objects.game_category }}</div>
+  <div>Название: {{ objects.name }}</div>
+  <div><img src="/media/{{ objects.image }}"  alt='{{ objects.name }}'></div>
+  <div>Описание: {{ objects.description }}</div>
+  <div>Цена: {{ objects.price }}</div>
+  <div>Количество: {{ objects.quantity }}</div>
+    <button class="btn btn-round form-control last">
+    <a href="{% url 'admin:products' category.pk %}">
+      к списку игр категории
+    </a>
+  </button>
+{% endblock %}
+

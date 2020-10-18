@@ -47,7 +47,7 @@
         </li>
             {% if user.is_superuser %}
                 <li class="menu-list">
-                    <a href="{% url 'admin:users' %}" class="menu-link">
+                    <a href="{% url 'admin:users' 1 %}" class="menu-link">
                        админка
                     </a>
                 </li>

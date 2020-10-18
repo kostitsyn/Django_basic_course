@@ -5,7 +5,7 @@
     </a>
   </li>
   <li>
-    <a href="{% url 'admin:users' %}" 
+    <a href="{% url 'admin:users' 1 %}"
        class="{% if request.resolver_match.url_name == 'users' %}
                 active
               {% endif %}">

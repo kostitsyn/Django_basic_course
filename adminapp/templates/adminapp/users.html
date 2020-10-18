@@ -9,6 +9,17 @@
         новый пользователь
       </a>
     </button>
+
+    <div class="paginator">
+      {% if objects.has_previous %}
+        <a href="{% url 'admin:users' objects.previous_page_number %}"><</a>
+      {% endif %}
+      <span class="current"> страница {{ objects.number }} из {{ objects.paginator.num_pages }}</span>
+      {% if objects.has_next %}
+        <a href="{% url 'admin:users' objects.next_page_number %}">></a>
+      {% endif %}
+    </div>
+
     {% for object in object_list %}
       <div
        class="user_record {% if not object.is_active %}not_active{% endif %}">

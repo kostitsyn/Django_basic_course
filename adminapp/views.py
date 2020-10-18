@@ -37,9 +37,11 @@ def user_create(request):
 class UsersListView(ListView):
     model = ShopUser
     template_name = 'adminapp/users.html'
+    paginate_by = 2
 
     @method_decorator(user_passes_test((lambda u: u.is_superuser)))
     def dispatch(self, *args, **kwargs):
+        print('hello')
         return super().dispatch(*args, **kwargs)
 
 

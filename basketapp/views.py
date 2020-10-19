@@ -11,21 +11,27 @@ from basketapp.models import Basket
 from mainapp.models import Games
 
 
-class BasketListView(ListView):
-    model = Basket
-    template_name = 'basketapp/basket.html'
-
-    @method_decorator(user_passes_test(login_required))
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-
-# @login_required
-# def basket(request):
-#     basket_items = Basket.objects.filter(user=request.user).order_by('product__game_category')
+# class BasketListView(ListView):
+#     model = Basket
+#     template_name = 'basketapp/basket.html'
 #
-#     content = {'title': 'корзина', 'basket_items': basket_items}
-#
-#     return render(request, 'basketapp/basket.html', content)
+#     @method_decorator(user_passes_test(login_required))
+#     def dispatch(self, *args, **kwargs):
+#         return super().dispatch(*args, **kwargs)
+
+@login_required
+def basket(request):
+
+    title = 'Корзина'
+
+    basket_items = Basket.objects.filter(user=request.user).order_by('product__game_category')
+
+    content = {
+        'title': title,
+        'basket_items': basket_items,
+    }
+
+    return render(request, 'basketapp/basket.html', content)
 
 
 # class BasketUpdateView(UpdateView):
@@ -72,7 +78,9 @@ def edit(request, pk, quantity):
             new_basket_item.delete()
 
         basket_items = Basket.objects.filter(user=request.user)
-        content = {'basket_items': basket_items}
+        content = {
+            'basket_items': basket_items
+        }
 
         result = render_to_string('basketapp/includes/inc_basket_list.html', content)
 

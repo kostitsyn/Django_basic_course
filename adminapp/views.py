@@ -41,7 +41,6 @@ class UsersListView(ListView):
 
     @method_decorator(user_passes_test((lambda u: u.is_superuser)))
     def dispatch(self, *args, **kwargs):
-        print('hello')
         return super().dispatch(*args, **kwargs)
 
 
@@ -107,7 +106,7 @@ class ProductCategoryCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data['css_file'] = ['style-index.css', 'bootstrap.min.css']
+        context_data['css_file'] = 'style-index.css'
         return context_data
 
 # @user_passes_test(lambda u: u.is_superuser)

@@ -1,4 +1,4 @@
-{% for item in object_list %}
+{% for item in basket_items %}
     <div class = 'basket_record'>
         <img src = '/media/{{ item.product.image }}' alt="{{ item.product.name }}">
         <span class = 'game_name'>{{ item.product.name }}</span>
@@ -9,12 +9,13 @@
         <a href = '{% url "basket:remove" item.pk %}' class = 'btn btn-round btn-dark'>Delete</a>
     </div>
 {% endfor %}
-{% if object_list %}
+{% if basket_items %}
     <div class = "basket_summary">
-        В корзине {{ object_list.0.total_quantity }} товаров общей стоимостью {{ object_list.0.total_cost }}&#36;
+        В корзине {{ basket_items.0.total_quantity }} товаров общей стоимостью {{ basket_items.0.total_cost }}&#36;
     </div>
 {% else %}
     <div class = "basket_summary">
         В корзине нет товаров
     </div>
 {% endif %}
+<a href='{% url "gallery:gallery_main" 1 %}' class ="btn btn-round badge-primary">К списку игр</a>

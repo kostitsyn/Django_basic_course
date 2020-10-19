@@ -32,10 +32,13 @@ def get_required_obj(lst, num, max_num=0):
 
 def main(request, pk=None):
 
+    title = 'главная'
+
     contact_data = Contacts.objects.get(pk=1)
     game_list = list(Games.objects.all())
     result_list = get_required_obj(game_list, 4)
     content = {
+        'title': title,
         'name_page': 'historical games',
         'css_file': 'style-index.css',
         'games': result_list,
@@ -45,17 +48,34 @@ def main(request, pk=None):
     return render(request, 'mainapp/index.html', content)
 
 def about(request):
-    pass
+
+    title = 'о нас'
+
+    content = {
+        'title': title,
+        'css_file': 'style-gallery.css',
+    }
+
+    return render(request, 'mainapp/about.html', content)
 
 def service(request):
-    pass
 
+    title = 'услуги'
+
+    content = {
+        'title': title,
+        'css_file': 'style-gallery.css',
+    }
+
+    return render(request, 'mainapp/services.html', content)
 
 
 
 
 
 def gallery(request, pk=None, page=1):
+
+    title = 'галлерея'
 
 
     links_menu = GameCategories.objects.all()
@@ -77,7 +97,7 @@ def gallery(request, pk=None, page=1):
         except EmptyPage:
             products_paginator = paginator.page(paginator.num_pages)
 
-        content = {'name_page': 'gallery',
+        content = {'title': title,
                    'css_file': 'style-gallery.css',
                    'links_menu': links_menu,
                    'games': products_paginator,
@@ -104,7 +124,7 @@ def gallery(request, pk=None, page=1):
         products_paginator = paginator.page(paginator.num_pages)
 
     content = {
-        'name_page': 'gallery',
+        'title': title,
         'css_file': 'style-gallery.css',
         'links_menu': links_menu,
         'games': products_paginator,
@@ -115,18 +135,38 @@ def gallery(request, pk=None, page=1):
     return render(request, 'mainapp/gallery.html', content)
 
 def news(request):
-    pass
 
-def team(request):
-    pass
-
-def contacts(request):
-    contact_data = Contacts.objects.get(pk=1)
-
+    title = 'новости'
 
     content = {
-        'name_page': 'contacts',
-        'css_file': 'style-contacts.css',
+        'title': title,
+        'css_file': 'style-gallery.css',
+    }
+
+    return render(request, 'mainapp/news.html', content)
+
+
+def team(request):
+
+    title = 'сотрудники'
+
+    content = {
+        'title': title,
+        'css_file': 'style-gallery.css',
+    }
+
+    return render(request, 'mainapp/team.html', content)
+
+
+def contacts(request):
+
+    title = 'контакты'
+
+    contact_data = Contacts.objects.get(pk=1)
+
+    content = {
+        'title': title,
+        'css_file': 'style-gallery.css',
         'contact_data': contact_data,
         'basket': get_basket(request.user)
     }
@@ -135,9 +175,12 @@ def contacts(request):
 
 
 def product(request, pk=None):
+
+    title = 'товары'
+
     contact_data = Contacts.objects.get(pk=1)
 
-    # basket = sum(list(Basket.objects.filter(user=request.user).values_list('quantity', flat=True)))
+
 
     game = get_object_or_404(Games, name=pk)
     category = game.game_category
@@ -146,7 +189,7 @@ def product(request, pk=None):
 
 
     content = {
-        'name_page': game.name,
+        'title': f'{title}: {game.name}',
         'game': game,
         'css_file': 'style-product-page.css',
         'games': result_list_similar,

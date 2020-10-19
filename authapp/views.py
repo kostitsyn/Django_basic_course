@@ -7,7 +7,8 @@ from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditF
 
 
 def login(request):
-    css_file = ['style-index.css', 'bootstrap.min.css']
+
+    title = "вход"
 
     next_url = request.GET.get('next', '')
 
@@ -24,7 +25,11 @@ def login(request):
             else:
                 return HttpResponseRedirect(reverse('main'))
 
-    content = {'name_page': 'вход', 'login_form': login_form, 'css_file': css_file, 'next': next_url}
+    content = {
+        'title': title,
+        'login_form': login_form,
+        'next': next_url
+    }
     return render(request, 'authapp/login.html', content)
 
 
@@ -34,7 +39,8 @@ def logout(request):
 
 
 def register(request):
-    css_file = ['style-index.css', 'bootstrap.min.css']
+
+    title = 'регистрация'
 
     if request.method == 'POST':
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
@@ -45,12 +51,17 @@ def register(request):
 
     else:
         register_form = ShopUserRegisterForm()
-    content = {'name_page': 'регистрация', 'register_form': register_form, 'css_file': css_file}
+    content = {
+        'title': title,
+        'register_form': register_form,
+    }
     return render(request, 'authapp/register.html', content)
 
 
 def edit(request):
-    css_file = ['style-index.css', 'bootstrap.min.css']
+
+    title = 'редактирование'
+
     if request.method == "POST":
         edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
         if edit_form.is_valid():
@@ -60,6 +71,9 @@ def edit(request):
     else:
         edit_form = ShopUserEditForm(instance=request.user)
 
-    content = {'name_page': 'редактирование', 'edit_form': edit_form, 'css_file': css_file}
+    content = {
+        'title': title,
+        'edit_form': edit_form
+    }
 
     return render(request, 'authapp/edit.html', content)

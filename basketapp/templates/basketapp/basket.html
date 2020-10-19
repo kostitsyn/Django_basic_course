@@ -1,16 +1,5 @@
 {% extends 'basketapp/base.html' %}
 
 {% block content %}
-    <div class = 'basket_list'>
-        <div class = 'basket_header'>
-            <span class = 'game_name'>Название игры</span>
-            <span class = 'category_name'>Жанр</span>
-            <span class = 'product_price'>Цена</span>
-            <span class = 'product_quantity'>Количество</span>
-            <span class = 'product_cost'>Общая стоимость</span>
-        </div>
-        {% include 'basketapp/includes/inc_basket_list.html' %}
-    </div>
-
-
+    {% include 'basketapp/includes/inc_basket_list.html' %}
 {% endblock %}
